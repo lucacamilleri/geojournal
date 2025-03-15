@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _entries.add(newEntry);
     });
-    
+
     log('Entry successfully added!');
   }
 
@@ -79,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ],
-        
       ),
     );
 
@@ -88,23 +87,23 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: _entries.length,
         itemBuilder:
             (ctx, index) => Dismissible(
-                onDismissed: (direction) {
+              onDismissed: (direction) {
                 //if swiped to the left
                 if (direction == DismissDirection.endToStart) {
                   _removeEntry(_entries[index]);
                 }
-                },
-                confirmDismiss: (direction) async {
+              },
+              confirmDismiss: (direction) async {
                 // Prevent dismiss if swiped to the right
                 return direction == DismissDirection.endToStart;
-                },
-                key: ValueKey(_entries[index].id),
-                background: Container(
+              },
+              key: ValueKey(_entries[index].id),
+              background: Container(
                 color: Colors.red,
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: const Icon(Icons.delete, color: Colors.white),
-                ),
+              ),
               child: Card(
                 margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: ListTile(
@@ -124,18 +123,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  leading: _entries[index].imagePath.isNotEmpty
-                      ? Image.file(File(_entries[index].imagePath), width: 50, height: 50)
-                      : null,
+                  leading:
+                      _entries[index].imagePath.isNotEmpty
+                          ? Image.file(
+                            File(_entries[index].imagePath),
+                            width: 50,
+                            height: 50,
+                          )
+                          : null,
                   onTap: () {
                     //get the details of the tapped entry
                     //and pass it to the JournalEntryScreen
                     //to edit the entry
                     Navigator.of(context).push<JournalEntry>(
                       MaterialPageRoute(
-                        builder: (ctx) => JournalEntryScreen(
-                          entry: _entries[index],
-                        ),
+                        builder:
+                            (ctx) => JournalEntryScreen(entry: _entries[index]),
                       ),
                     );
                   },
