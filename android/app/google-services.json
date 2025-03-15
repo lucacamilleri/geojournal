@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "244877980457",
+    "firebase_url": "https://flutter-b897f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "flutter-b897f",
+    "storage_bucket": "flutter-b897f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244877980457:android:2c6e8374a22250135a3d38",
+        "android_client_info": {
+          "package_name": "com.mcast.geosnap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjQ1n3TgRmNEyXOLI-Id4RWjUPogugOY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
