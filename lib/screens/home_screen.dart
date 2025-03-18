@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget content = const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Text(
             'No journal entries found!',
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -88,17 +88,30 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder:
             (ctx, index) => Dismissible(
               onDismissed: (direction) {
-                //if swiped to the left
                 if (direction == DismissDirection.endToStart) {
                   _removeEntry(_entries[index]);
                 }
               },
               confirmDismiss: (direction) async {
-                // Prevent dismiss if swiped to the right
-                return direction == DismissDirection.endToStart;
+                if (direction == DismissDirection.startToEnd) {
+                  Navigator.of(context).push<JournalEntry>(
+                    MaterialPageRoute(
+                      builder: (ctx) => JournalEntryScreen(entry: _entries[index]),
+                    ),
+                  );
+                  return false;
+                }
+                return true;
               },
               key: ValueKey(_entries[index].id),
               background: Container(
+                color: Colors.orange,
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Icon(Icons.edit, color: Colors.white),
+                
+              ),
+              secondaryBackground: Container(
                 color: Colors.red,
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -132,15 +145,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                           : null,
                   onTap: () {
-                    //get the details of the tapped entry
-                    //and pass it to the JournalEntryScreen
-                    //to edit the entry
-                    Navigator.of(context).push<JournalEntry>(
-                      MaterialPageRoute(
-                        builder:
-                            (ctx) => JournalEntryScreen(entry: _entries[index]),
-                      ),
-                    );
+                    //open the view screen (view_screen.dart)
+                    //to view the journal entry in a view format
+                    //bigger picture, bigger text, no edit
+                    //no delete, just a back button
+                    
+
                   },
                 ),
               ),
