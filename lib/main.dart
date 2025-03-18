@@ -29,7 +29,7 @@ class GeoJournalApp extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 34, 116, 139),
           surface: const Color.fromARGB(255, 245, 245, 245),
         ),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 50, 50, 50),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 21, 21, 21),
       ),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
