@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../models/journal_entry.dart';
 import 'journal_entry_screen.dart';
+import 'view_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -145,12 +146,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                           : null,
                   onTap: () {
-                    //open the view screen (view_screen.dart)
-                    //to view the journal entry in a view format
-                    //bigger picture, bigger text, no edit
-                    //no delete, just a back button
-                    
-
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => ViewScreen(entry: _entries[index]),
+                      ),
+                    );
                   },
                 ),
               ),

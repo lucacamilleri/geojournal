@@ -193,7 +193,7 @@ class JournalEntryScreenState extends State<JournalEntryScreen> {
               ),
               const SizedBox(height: 10),
               if (_image != null)
-                Image.file(File(_image!.path), width: 50, height: 50),
+                Image.file(File(_image!.path), width: 100, height: 100),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
