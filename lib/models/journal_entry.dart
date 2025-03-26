@@ -5,6 +5,7 @@ class JournalEntry {
   final String location;
   final String imagePath;
 
+  // A constructor that initializes the properties of the class
   JournalEntry({
     required this.id,
     required this.title,
@@ -13,6 +14,7 @@ class JournalEntry {
     required this.imagePath,
   });
 
+  // A method that converts the class properties to a map
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -23,13 +25,14 @@ class JournalEntry {
     };
   }
 
+  // A factory method that creates a JournalEntry object from a map
   factory JournalEntry.fromJson(Map<String, dynamic> json) {
     return JournalEntry(
       id: json['id'] ?? '',
-      title: json['title'] ?? '', // Provide a default value if null
-      content: json['content'] ?? '', // Provide a default value if null
-      location: json['location'] ?? '', // Provide a default value if null
-      imagePath: json['imagePath'] ?? '', // Provide a default value if null
+      title: json['title'] ?? '',
+      content: json['content'] ?? '',
+      location: json['location'] ?? '',
+      imagePath: json['imagePath'] ?? '',
     );
   }
 }

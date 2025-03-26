@@ -1,3 +1,4 @@
+// Importing the necessary packages
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../models/journal_entry.dart';
@@ -8,6 +9,12 @@ import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
+// A StatefulWidget that allows the user to create a new JournalEntry
+// or edit an existing one
+// The user can add a title, content, location and an image
+// The user can save the entry or reset/clear the form
+
+// It also allows for editing an existing entry
 class JournalEntryScreen extends StatefulWidget {
   final JournalEntry? entry;
 
@@ -17,6 +24,12 @@ class JournalEntryScreen extends StatefulWidget {
   JournalEntryScreenState createState() => JournalEntryScreenState();
 }
 
+// The State class for the JournalEntryScreen
+// It contains the form key, text controllers for the title and content
+// and the location of the entry
+// It also contains the database reference and the image path
+// It has methods to save the entry, add a photo, and a check and request permission
+// to be able to get the current location
 class JournalEntryScreenState extends State<JournalEntryScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
@@ -30,6 +43,8 @@ class JournalEntryScreenState extends State<JournalEntryScreen> {
   XFile? _image;
   String _imagePath = '';
 
+  // A method to initialize the state of the widget
+  // It acts as a sort of constructor for the State class
   @override
   void initState() {
     super.initState();
@@ -45,6 +60,10 @@ class JournalEntryScreenState extends State<JournalEntryScreen> {
     }
   }
 
+  // A method to save the entry
+  // It validates the form, checks and requests permission
+  // to get the current location, copies the image to the application directory
+  // and saves the entry to the database
   Future<void> _saveEntry() async {
     showDialog(
       context: context,
@@ -54,6 +73,7 @@ class JournalEntryScreenState extends State<JournalEntryScreen> {
       },
     );
 
+    // Validates every field of the form
     if (_formKey.currentState!.validate()) {
       final hasPermission = await _checkAndRequestPermission();
 
@@ -77,7 +97,7 @@ class JournalEntryScreenState extends State<JournalEntryScreen> {
         location: _location,
         imagePath: _imagePath,
       );
-
+      
       try {
         await _database.child(newEntry.id).set(newEntry.toJson());
         if (mounted) {
@@ -92,6 +112,9 @@ class JournalEntryScreenState extends State<JournalEntryScreen> {
     }
   }
 
+  // A method to add a photo to the entry
+  // It requests permission to use the camera
+  // and allows the user to take a photo and set it as the image
   Future<void> _addPhoto() async {
     final PermissionStatus status = await Permission.camera.request();
     if (status.isGranted) {
@@ -112,6 +135,7 @@ class JournalEntryScreenState extends State<JournalEntryScreen> {
     }
   }
 
+  // A method to check and request permission to get the current location
   Future<bool> _checkAndRequestPermission() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -143,6 +167,9 @@ class JournalEntryScreenState extends State<JournalEntryScreen> {
     return await Geolocator.getCurrentPosition();
   }
 
+  // A method to build the JournalEntryScreen
+  // It contains a form with text fields for the title and content
+  // and buttons to add a photo, reset the form and save the entry
   @override
   Widget build(BuildContext context) {
     return Scaffold(

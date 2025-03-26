@@ -1,7 +1,12 @@
+// Importing the necessary packages
 import 'package:flutter/material.dart';
 import '../models/journal_entry.dart';
 import 'dart:io';
 
+// A StatelessWidget that displays the details of a JournalEntry
+// including the title, content, location and image
+// The user can view the details of the entry
+// or go back to the previous screen
 class ViewScreen extends StatelessWidget {
   final JournalEntry entry;
 
@@ -42,6 +47,8 @@ class ViewScreen extends StatelessWidget {
               child: Text(entry.location, style: const TextStyle(color: Colors.grey)),
             ),
             const SizedBox(height: 8),
+            // Display the image if the entry has an image
+            // otherwise display nothing
             if (entry.imagePath.isNotEmpty)
               Image.file(
                 File(entry.imagePath),

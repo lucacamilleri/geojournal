@@ -1,12 +1,15 @@
+// Importing the necessary packages
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../models/journal_entry.dart';
 import 'journal_entry_screen.dart';
 import 'view_screen.dart';
 
+// A StatefulWidget that displays the home screen of the application
+// where the user can swipe left/right to edit or delete journal entries
+// and tap on an entry to view its details
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
